@@ -2,9 +2,10 @@
 -- For use in Hachiemon on Bizhawk
 
 -- Addresses:
-minuteAddr = 0xb8 --Ingame time minutes
-secondAddr = 0xb9 --Ingame time seconds
-frameAddr = 0xba --Ingame time frames
+lvlAddr = 0xac -- Level
+minuteAddr = 0xb8 -- Ingame time minutes
+secondAddr = 0xb9 -- Ingame time seconds
+frameAddr = 0xba -- Ingame time frames
 
 -- Function to format the ingame time display
 function readTime()
@@ -22,6 +23,8 @@ end
 
 -- Main loop
 while true do
-    gui.text(0, 0, "Time: " .. readTime())
+    lvl = memory.readbyte(lvlAddr) + 1
+    gui.text(0, 0, "Level " .. lvl)
+    gui.text(0, 14, "Time: " .. readTime())
     emu.frameadvance()
 end
